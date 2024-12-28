@@ -6,6 +6,7 @@ export interface Product {
   images: string[];
   price: number;
   qty: number;
+  slug: string;
   categoryId?: Types.ObjectId | null;
   createdAt: Date;
   updatedAt: Date;
@@ -15,7 +16,7 @@ export interface Product {
 const Schema = mongoose.Schema;
 
 // const ProductsSchema = new Schema<Product>(
-const ProductsSchema = new Schema(
+const ProductsSchema = new Schema<Product>(
   {
     name: {
       type: Schema.Types.String,

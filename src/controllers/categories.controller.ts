@@ -3,6 +3,18 @@ import CategoriesModel from "../models/categories.model";
 
 export default {
     async create(req: Request, res: Response) {
+        /**
+     #swagger.tags = ['Categories']
+     #swagger.security = [{
+      "bearerAuth": []
+     }]
+     #swagger.requestBody = {
+      required: true,
+      schema: {
+        $ref: "#/components/schemas/CategoriesCreateRequest"
+      }
+     }
+     */
         try {
             const result = await CategoriesModel.create(req.body);
             res.status(201).json({
@@ -18,6 +30,9 @@ export default {
         }
     },
     async findAll(req: Request, res: Response) {
+        /**
+#swagger.tags = ['Categories']
+*/
         try {
             const result = await CategoriesModel.find();
             res.status(200).json({
@@ -33,6 +48,9 @@ export default {
         }
     },
     async findOne(req: Request, res: Response) {
+        /**
+#swagger.tags = ['Categories']
+*/
         try {
             const result = await CategoriesModel.findOne({
                 _id: req.params.id,
@@ -50,6 +68,18 @@ export default {
         }
     },
     async update(req: Request, res: Response) {
+        /**
+#swagger.tags = ['Categories']
+#swagger.security = [{
+"bearerAuth": []
+}]
+#swagger.requestBody = {
+required: true,
+schema: {
+$ref: "#/components/schemas/CategoriesCreateRequest"
+}
+}
+*/
         try {
             const result = await CategoriesModel.findOneAndUpdate(
                 { _id: req.params.id },
@@ -72,6 +102,11 @@ export default {
         }
     },
     async delete(req: Request, res: Response) {
+        /**
+#swagger.tags = ['Categories']
+#swagger.security = [{
+"bearerAuth": []
+*/
         try {
             const result = await CategoriesModel.findOneAndDelete({
                 _id: req.params.id,

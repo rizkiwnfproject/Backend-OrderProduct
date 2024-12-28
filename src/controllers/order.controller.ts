@@ -4,10 +4,22 @@ import { IRequestWithUser } from "../middlewares/auth.middleware";
 import { IPaginationQuery } from "../utils/interfaces";
 
 export default {
-    async createOrder(req: IRequestWithUser, res: Response) {
+    async create(req: IRequestWithUser, res: Response) {
+        /**
+        #swagger.tags = ['Orders']
+        #swagger.security = [{
+        "bearerAuth": []
+        }]
+        #swagger.requestBody = {
+        required: true,
+        schema: {
+        $ref: "#/components/schemas/OrderCreateRequest"
+        }
+        }
+        */
         try {
             // Validasi input JSON
-            const { orderItems } = req.body;
+            const { orderItems, grandTotal } = req.body;
             if (!Array.isArray(orderItems) || orderItems.length === 0) {
                 return res.status(400).json({
                     message: "orderItems harus berupa array dan tidak boleh kosong",
@@ -29,6 +41,7 @@ export default {
 
             // Proses pembuatan order
             const newOrder = await createOrder({
+                grandTotal,
                 orderItems,
                 createdBy: userId,
             });
@@ -47,7 +60,10 @@ export default {
         }
     },
 
-    async getOrdersByUser(req: IRequestWithUser, res: Response) {
+    async findOne(req: IRequestWithUser, res: Response) {
+        /**
+        #swagger.tags = ['Orders']
+        */
         try {
             if (!req.user || !req.user.id) {
                 return res.status(403).json({ message: "Unauthorized access" });

@@ -33,8 +33,8 @@ router.post("/auth/me", authMiddleware, authController.me);
 router.put("/auth/update-profile", authMiddleware, authController.updateProfile);
 
 // order
-router.get("/orders", authMiddleware, orderController.getOrdersByUser);
-router.post("orders", authMiddleware, orderController.createOrder);
+router.get("/orders", authMiddleware, orderController.findOne);
+router.post("/orders", authMiddleware, orderController.create);
 
 
 export default router;

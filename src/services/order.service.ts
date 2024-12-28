@@ -5,6 +5,7 @@ import { Types } from "mongoose";
 
 export const createOrder = async (
     payload: {
+        grandTotal?: number;
         orderItems: { product: string; quantity: number }[];
         createdBy: Types.ObjectId | String;
     }
@@ -34,7 +35,8 @@ export const createOrder = async (
         })
     );
 
-    const grandTotal = processedOrderItems.reduce((total, item) => total + item.subTotal, 0);
+    const grandTotal = payload.grandTotal;
+    // const grandTotal = payload.grandTotal ?? processedOrderItems.reduce((total, item) => total + item.subTotal, 0);
 
     const savedOrderItems = await Promise.all(
         processedOrderItems.map(async (item) => {
