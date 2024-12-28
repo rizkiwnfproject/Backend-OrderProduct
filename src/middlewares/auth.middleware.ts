@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { getUserData, IUserToken } from "../utils/jwt";
 
 export interface IRequestWithUser extends Request {
-    user?: IUserToken;
+    user?: IUserToken | any;
 }
 
 export default (req: Request, res: Response, next: NextFunction) => {

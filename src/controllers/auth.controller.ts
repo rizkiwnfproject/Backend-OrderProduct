@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
-
 import UserModel, { User } from "../models/user.model";
 import { IRequestWithUser } from "../middlewares/auth.middleware";
-
 import * as Yup from "yup";
 import { login, register, updateProfile } from "../services/auth.service";
 import { ObjectId } from "mongoose";
